@@ -63,7 +63,6 @@ void loop()
     if ((steeringPercent > -0.1f) && (steeringPercent < 0.1f))
     {
         steeringPercent = 0.0f;
-        stopmotor();
     }
 
     float leftSpeedPercent = speedPercent + steeringPercent;
@@ -96,26 +95,37 @@ void stopmotor()
 
 void Set_Motor(float Lval, float Rval)
 {
-    if (Lval >= 0)
-    {
+    if (Lval > 0)
+    { // Forward
         analogWrite(LPWM_1, Lval);
         digitalWrite(LPWM_2, LOW);
     }
-    else
-    {
+    else if (Lval < 0)
+    { // Reverse
         Lval = abs(Lval);
         analogWrite(LPWM_2, Lval);
         digitalWrite(LPWM_1, LOW);
     }
-    if (Rval >= 0)
-    {
+    else
+    { // Brake
+        digitalWrite(LPWM_1, HIGH);
+        digitalWrite(LPWM_2, HIGH);
+    }
+
+    if (Rval > 0)
+    { // Forward
         analogWrite(RPWM_1, Rval);
         digitalWrite(RPWM_2, LOW);
     }
-    else
-    {
+    else if (Rval < 0)
+    { // Reverse
         Rval = abs(Rval);
         analogWrite(RPWM_2, Rval);
         digitalWrite(RPWM_1, LOW);
+    }
+    else
+    { // Brake
+        digitalWrite(RPWM_1, HIGH);
+        digitalWrite(RPWM_2, HIGH);
     }
 }
