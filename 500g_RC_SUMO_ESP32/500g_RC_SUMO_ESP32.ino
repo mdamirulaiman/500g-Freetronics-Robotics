@@ -10,8 +10,8 @@
 
 #define OB_LED 2
 
-#define NEUTRAL_SPEED 1470
-#define NEUTRAL_STEERING 1470
+#define NEUTRAL_SPEED 1500
+#define NEUTRAL_STEERING 1500
 #define RANGE_SPEED 1000
 #define RANGE_STEERING 1000
 
@@ -31,7 +31,7 @@ void setup()
 
 void loop()
 {
-    int speedPulse = pulseIn(RC_SPEED, HIGH, 40000);
+    int speedPulse = pulseIn(RC_SPEED, HIGH, 50000);
     if (speedPulse == 0)
     {
         digitalWrite(OB_LED, LOW);
@@ -48,7 +48,7 @@ void loop()
         speedPercent = 0.0f;
     }
 
-    int steeringPulse = pulseIn(RC_STEERING, HIGH, 40000);
+    int steeringPulse = pulseIn(RC_STEERING, HIGH, 50000);
     if (steeringPulse == 0)
     {
         digitalWrite(OB_LED, LOW);
@@ -83,6 +83,12 @@ void loop()
     {
         digitalWrite(OB_LED, LOW);
     }
+
+    Serial.print("speedPulse:");
+    Serial.print(speedPulse);
+    Serial.print(" | ");
+    Serial.print("steeringPulse:");
+    Serial.println(steeringPulse);
 }
 
 void stopmotor()
