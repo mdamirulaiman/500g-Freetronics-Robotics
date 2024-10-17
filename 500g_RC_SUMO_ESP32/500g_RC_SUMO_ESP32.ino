@@ -44,7 +44,7 @@ void loop()
     speedPercent = constrain(speedPercent, -1.0f, 1.0f);
 
     // Add in dead band.
-    if ((speedPercent > -0.15f) && (speedPercent < 0.15f))
+    if ((speedPercent > -0.1f) && (speedPercent < 0.1f))
     {
         speedPercent = 0.0f;
     }
@@ -96,15 +96,15 @@ void loop()
     Serial.print(leftSpeed);
     Serial.print(" | ");
     Serial.print("rightSpeed:");
-    Serial.print(rightSpeed);
+    Serial.println(rightSpeed);
 }
 
 void stopmotor()
 {
-    digitalWrite(LPWM_1, HIGH);
-    digitalWrite(LPWM_2, HIGH);
-    digitalWrite(RPWM_1, HIGH);
-    digitalWrite(RPWM_2, HIGH);
+    analogWrite(LPWM_1, 255);
+    analogWrite(LPWM_2, 255);
+    analogWrite(RPWM_1, 255);
+    analogWrite(RPWM_2, 255);
 }
 
 void Set_Motor(float Lval, float Rval)
@@ -112,24 +112,24 @@ void Set_Motor(float Lval, float Rval)
     if (Lval > 0)
     { // Forward
         analogWrite(LPWM_1, Lval);
-        digitalWrite(LPWM_2, LOW);
+        analogWrite(LPWM_2, 0);
     }
     else if (Lval < 0)
     { // Reverse
         Lval = abs(Lval);
         analogWrite(LPWM_2, Lval);
-        digitalWrite(LPWM_1, LOW);
+        analogWrite(LPWM_1, 0);
     }
 
     if (Rval > 0)
     { // Forward
         analogWrite(RPWM_1, Rval);
-        digitalWrite(RPWM_2, LOW);
+        analogWrite(RPWM_2, 0);
     }
     else if (Rval < 0)
     { // Reverse
         Rval = abs(Rval);
         analogWrite(RPWM_2, Rval);
-        digitalWrite(RPWM_1, LOW);
+        analogWrite(RPWM_1, 0);
     }
 }
