@@ -31,7 +31,7 @@ void setup()
 
 void loop()
 {
-    int speedPulse = pulseIn(RC_SPEED, HIGH, 50000);
+    int speedPulse = pulseIn(RC_SPEED, HIGH, 40000);
     if (speedPulse == 0)
     {
         digitalWrite(OB_LED, LOW);
@@ -44,12 +44,12 @@ void loop()
     speedPercent = constrain(speedPercent, -1.0f, 1.0f);
 
     // Add in dead band.
-    if ((speedPercent > -0.1f) && (speedPercent < 0.1f))
+    if ((speedPercent > -0.15f) && (speedPercent < 0.15f))
     {
         speedPercent = 0.0f;
     }
 
-    int steeringPulse = pulseIn(RC_STEERING, HIGH, 50000);
+    int steeringPulse = pulseIn(RC_STEERING, HIGH, 40000);
     if (steeringPulse == 0)
     {
         digitalWrite(OB_LED, LOW);
@@ -90,7 +90,13 @@ void loop()
     Serial.print(speedPulse);
     Serial.print(" | ");
     Serial.print("steeringPulse:");
-    Serial.println(steeringPulse);
+    Serial.print(steeringPulse);
+    Serial.print(" | ");
+    Serial.print("leftSpeed:");
+    Serial.print(leftSpeed);
+    Serial.print(" | ");
+    Serial.print("rightSpeed:");
+    Serial.print(rightSpeed);
 }
 
 void stopmotor()
@@ -114,11 +120,6 @@ void Set_Motor(float Lval, float Rval)
         analogWrite(LPWM_2, Lval);
         digitalWrite(LPWM_1, LOW);
     }
-    else
-    { // Brake
-        digitalWrite(LPWM_1, HIGH);
-        digitalWrite(LPWM_2, HIGH);
-    }
 
     if (Rval > 0)
     { // Forward
@@ -130,10 +131,5 @@ void Set_Motor(float Lval, float Rval)
         Rval = abs(Rval);
         analogWrite(RPWM_2, Rval);
         digitalWrite(RPWM_1, LOW);
-    }
-    else
-    { // Brake
-        digitalWrite(RPWM_1, HIGH);
-        digitalWrite(RPWM_2, HIGH);
     }
 }
