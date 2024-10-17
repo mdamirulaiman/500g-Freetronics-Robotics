@@ -35,6 +35,7 @@ void loop()
     if (speedPulse == 0)
     {
         digitalWrite(OB_LED, LOW);
+        stopmotor();
         return;
     }
 
@@ -52,6 +53,7 @@ void loop()
     if (steeringPulse == 0)
     {
         digitalWrite(OB_LED, LOW);
+        stopmotor();
         return;
     }
 
