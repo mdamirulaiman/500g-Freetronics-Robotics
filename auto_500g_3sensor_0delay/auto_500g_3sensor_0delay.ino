@@ -74,9 +74,9 @@ void setup() {
   Serial.println("500g Minisumo");
   //Opponent Sensor Connection
   pinMode(RSens, INPUT_PULLUP);
-  pinMode(RFSens, INPUT_PULLUP);
+  //pinMode(RFSens, INPUT_PULLUP);
   pinMode(MSens, INPUT_PULLUP);
-  pinMode(LFSens, INPUT_PULLUP);
+  //pinMode(LFSens, INPUT_PULLUP);
   pinMode(LSens, INPUT_PULLUP);
   //Line Sensor Connection
   pinMode(LEdge, INPUT);
