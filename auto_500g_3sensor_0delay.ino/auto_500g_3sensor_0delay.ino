@@ -36,7 +36,7 @@ int EDGE_L = 300, EDGE_R = 300;
 // Variables
 #define LEFT    0
 #define RIGHT   1
-int duration = 5 ; //5 SECOND delay
+int duration = 0 ; //5 SECOND delay
 int searchDir = LEFT ;
 int IdleSpeed = 50;
 int MaxSpeed = 80;
@@ -49,11 +49,18 @@ int RDir = 10 ;  //right side direction
 int REdge = A1 ;  // Right Line Sensor
 int LEdge = A0 ;  // Left Line Sensor
 
+/* default connection for mini maker sumo
 int RSens = 13 ;  // Right opponent Sensor
 int RFSens = 7 ;  // Right Middle opponent Sensor
 int MSens = 6 ;  // Middle opponent Sensor
 int LFSens = 5 ;  // Left Middle opponent Sensor
 int LSens = 12 ;  // Left opponent Sensor
+*/
+
+// for 500g xenix sumo
+int RSens = 7 ;  // Right opponent Sensor
+int MSens = 6 ;  // Middle opponent Sensor
+int LSens = 5 ;  // Left opponent Sensor
 
 int start = 2 ;  // start start
 int buzzer = 8 ; // buzzer
@@ -97,7 +104,7 @@ void setup() {
   while (millis() < 100 ) {
     digitalWrite(led, HIGH);
     Serial.println("Press Start for Calibration");
-    if (digitalRead(start)) {
+    if (!digitalRead(start)) {
       Serial.println("Calibrating starts in 3");
       digitalWrite(led, HIGH);
       tone(buzzer, 523, 500);
@@ -162,7 +169,7 @@ void loop() {
 *******************************************************************************/
 void startRoutine() {
   delay(200);
-  while (!digitalRead(start)) {
+  while (digitalRead(start)) {
     sensordebug();
     if (analogRead(LEdge) < 500 || analogRead(REdge) < 500 ) {
       digitalWrite(led, HIGH);
@@ -170,7 +177,7 @@ void startRoutine() {
       digitalWrite(led, LOW);
     } delay(20);
   }
-  if (digitalRead(start)) {
+  if (!digitalRead(start)) {
     Serial.println("Start Sumo");
 
     for (int i = 1; i <= duration ; i++) { //set delay time

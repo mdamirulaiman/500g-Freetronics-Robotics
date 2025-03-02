@@ -94,7 +94,7 @@ void setup() {
   //digitalWrite(start,HIGH);
   digitalWrite(buzzer, LOW);
 
-  while (millis() < 3000 ) {
+  while (millis() < 100 ) {
     digitalWrite(led, HIGH);
     Serial.println("Press Start for Calibration");
     if (!digitalRead(start)) {
@@ -161,7 +161,7 @@ void loop() {
 	This function should be called once only when the game start.
 *******************************************************************************/
 void startRoutine() {
-  delay(1500);
+  delay(200);
   while (digitalRead(start)) {
     sensordebug();
     if (analogRead(LEdge) < 500 || analogRead(REdge) < 500 ) {
