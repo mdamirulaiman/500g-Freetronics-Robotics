@@ -74,11 +74,11 @@ void setup() {
 	Serial.begin(9600);  // Computer & Arduino Interface started in 9600 bits per second, We need to write for usb communication debug.
 	Serial.println("Ikedo MiniSumo");
 	//Opponent Sensor Connection
-	pinMode(RSens, INPUT_PULLUP);
-	pinMode(RFSens, INPUT_PULLUP);
-	pinMode(MSens, INPUT_PULLUP);
-	pinMode(LFSens, INPUT_PULLUP);
-	pinMode(LSens, INPUT_PULLUP);
+	pinMode(RSens, INPUT);
+	pinMode(RFSens, INPUT);
+	pinMode(MSens, INPUT);
+	pinMode(LFSens, INPUT);
+	pinMode(LSens, INPUT);
 	//Line Sensor Connection
 	pinMode(LEdge, INPUT);
 	pinMode(REdge, INPUT);
